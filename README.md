@@ -27,3 +27,7 @@ php artisan migrate:fresh --seed
 Username: test@example.com
 Password: secret
 
+7. El enlace principal de la pagina es:
+
+[URL de la web](http://localhost/laravel/todolist-one/public/)
+
