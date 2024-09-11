@@ -1,0 +1,44 @@
+### List of Tasks
+GET http://localhost/laravel/todolist-one/public/api/auth/tasks
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2xhcmF2ZWwvdG9kb2xpc3Qtb25lL3B1YmxpYy9hcGkvYXV0aC9sb2dpbiIsImlhdCI6MTcyNjAxNjc0OCwiZXhwIjoxNzI2MDIwMzQ4LCJuYmYiOjE3MjYwMTY3NDgsImp0aSI6IlJaZ3IzOHR4YXBIczR1ZFMiLCJzdWIiOiIyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.L0Sp8wBVzv43pMJvO2vDZFu-Lo9Jg2g28ETbxKw6gBo
+
+### Create a Task
+POST http://localhost/laravel/todolist-one/public/api/auth/create
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2xhcmF2ZWwvdG9kb2xpc3Qtb25lL3B1YmxpYy9hcGkvYXV0aC9sb2dpbiIsImlhdCI6MTcyNjAxNjc0OCwiZXhwIjoxNzI2MDIwMzQ4LCJuYmYiOjE3MjYwMTY3NDgsImp0aSI6IlJaZ3IzOHR4YXBIczR1ZFMiLCJzdWIiOiIyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.L0Sp8wBVzv43pMJvO2vDZFu-Lo9Jg2g28ETbxKw6gBo
+Content-Type: application/json
+
+{
+  "task": "Buy sugar 2" 
+}
+
+### Create User
+POST http://localhost/laravel/todolist-one/public/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Juan Doe",
+  "email": "juan@example.com",
+  "password": "secret123",
+  "password_confirmation": "secret123"
+}
+
+### Login
+POST http://localhost/laravel/todolist-one/public/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "juan@example.com",
+  "password": "secret123"
+}
+
+### Logout
+POST http://localhost/laravel/todolist-one/public/api/auth/logout
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2xhcmF2ZWwvdG9kb2xpc3Qtb25lL3B1YmxpYy9hcGkvYXV0aC9sb2dpbiIsImlhdCI6MTcyNjAxNTMzOSwiZXhwIjoxNzI2MDE4OTM5LCJuYmYiOjE3MjYwMTUzMzksImp0aSI6Imx2WjJoR1RWVW9BcFVDcWgiLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.Ey9P9RCOFChKAPcbw1P1C7h-zMAbi3flqhpsk-lUm4U
+
+### Refresh Token
+POST http://localhost/laravel/todolist-one/public/api/auth/refresh
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2xhcmF2ZWwvdG9kb2xpc3Qtb25lL3B1YmxpYy9hcGkvYXV0aC9sb2dpbiIsImlhdCI6MTcyNjAxNTMzOSwiZXhwIjoxNzI2MDE4OTM5LCJuYmYiOjE3MjYwMTUzMzksImp0aSI6Imx2WjJoR1RWVW9BcFVDcWgiLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.Ey9P9RCOFChKAPcbw1P1C7h-zMAbi3flqhpsk-lUm4U
+
+### Get User -> me
+POST http://localhost/laravel/todolist-one/public/api/auth/me
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2xhcmF2ZWwvdG9kb2xpc3Qtb25lL3B1YmxpYy9hcGkvYXV0aC9sb2dpbiIsImlhdCI6MTcyNjAxNTMzOSwiZXhwIjoxNzI2MDE4OTM5LCJuYmYiOjE3MjYwMTUzMzksImp0aSI6Imx2WjJoR1RWVW9BcFVDcWgiLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.Ey9P9RCOFChKAPcbw1P1C7h-zMAbi3flqhpsk-lUm4U
