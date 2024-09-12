@@ -75,12 +75,31 @@
           color:black;
 
           & > li {
-            padding: 5px 20px;
+            position: relative;
+            padding: 5px 10px;
             cursor: grab;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
 
             &:hover {
               background-color: rgb(76, 76, 76);
               color: white;
+            }
+
+            & > img {
+              content: ' ';
+              width: 24px;
+              height: 24px;
+              background-image: url('');
+              background-repeat: no-repeat
+              background-size: contain;
+              z-index: 20;
+              cursor: pointer;
+              &:hover {
+                color:red;
+              }
             }
           }
         }
@@ -151,10 +170,19 @@
         .then(res => res.json())
         .then(data => {
           data.forEach(d => {
-            const $li = document.createElement('li');
+            const $li = document.createElement('li');          
             $li.setAttribute('draggable', 'true');
-            $li.textContent = d.task;
             $li.addEventListener('dragstart', handleDragStart);
+
+            const $span = document.createElement('span');
+            $span.textContent = d.task;
+            $li.appendChild($span);
+
+            const $trash = document.createElement('img');
+            $trash.src = 'http://localhost/laravel/todolist-one/public/IconDelete.svg';
+            $trash.setAttribute('data-id', d.id);
+            $trash.addEventListener('click', deleteTask);
+            $li.appendChild($trash);
 
             $tasks.appendChild($li);
           })})
@@ -183,12 +211,21 @@
         .then(data => {          
           $form.task.value = '';
 
-          const $li = document.createElement('li');
-          $li.setAttribute('draggable', 'true');
-          $li.textContent = data.task;
-          $li.addEventListener('dragstart', handleDragStart);
+          const $li = document.createElement('li');          
+            $li.setAttribute('draggable', 'true');
+            $li.addEventListener('dragstart', handleDragStart);
 
-          $tasks.appendChild($li);
+            const $span = document.createElement('span');
+            $span.textContent = data.task;
+            $li.appendChild($span);
+
+            const $trash = document.createElement('img');
+            $trash.src = 'http://localhost/laravel/todolist-one/public/IconDelete.svg';
+            $trash.setAttribute('data-id', data.id);
+            $trash.addEventListener('click', deleteTask);
+            $li.appendChild($trash);
+
+            $tasks.appendChild($li);
         })
         .catch(err => {
           console.log(err);
@@ -229,6 +266,9 @@
       e.preventDefault();
       const $droppedElement = e.target.closest('ul');
       $droppedElement.appendChild(currentTarget);
+      
+      currentTarget = null;
+
       // $tasks.removeChild(currentTarget);
     }
 
@@ -258,6 +298,25 @@
           console.log(err);
         });
     });
+
+
+    function deleteTask(e){
+      const id = e.target.getAttribute('data-id');
+      const $task = e.target.closest('li');
+      fetch('http://localhost/laravel/todolist-one/public/api/auth/delete/'+id,{
+        method: 'DELETE',
+        headers:{
+          'Authorization': `Bearer ${token}`
+        },
+      }).then(res => res.json())
+        .then(data => {
+          console.log(data);
+          $task.remove();
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
 
 
   </script>

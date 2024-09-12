@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('task');
+            // $table->string('status')->default('0');
 
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')

@@ -14,7 +14,7 @@ class TaskController extends Controller
     {
         //
         $tasks = Task::all();
-        return view('task.index', compact('tasks'));
+        return view('task.index');
     }
 
     public function listOfTasks()
@@ -48,43 +48,61 @@ class TaskController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(task $task)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(task $task)
+    public function edit(Request $request, Task $task)
     {
-        //
-    }
+        if(!auth()->user()){
+            return response()->json(['error' => 'You must be logged in to create a task'], 401); // Código 401 Unauthorized
+        }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, task $task)
-    {
-        //
+        $userId = auth()->user()->id;
+
+        $task = Task::find($task->id);
+
+        if(!$task){
+            return response()->json(['error' => 'Task not found'], 404);
+        }
+
+        $task->task = $request->task;
+        $task->user_id = $userId;
+        $task->save();
+
+        return response()->json([compact('task'), 'message' => 'Task updated successfully'], 201);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(task $task)
+    public function destroy($task)
     {
-        //
+        if(!auth()->user()){
+            return response()->json(['error' => 'You must be logged in to create a task'], 401); // Código 401 Unauthorized
+        }
+
+        $task = Task::find($task);
+        if(!$task){
+            return response()->json(['error' => 'TAsk not found'], 404);
+        }
+
+        $task->delete();
+        return response()->json(['message' => 'Task deleted successfully'], 200);
+    }
+
+    public function changeStatus($task) {
+        return $task;
+
+        $task = Task::find($task);        
+        $task->status = '1';
+    }
+
+    private function validateToken($token)
+    {
+        if(!auth()->user()){
+            return false;
+        }
+        return true;
     }
 }

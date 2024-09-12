@@ -16,4 +16,5 @@ Route::group([
 
     Route::get('/tasks', [TaskController::class, 'listOfTasks'])->middleware('auth:api');
     Route::post('/create', [TaskController::class, 'create'])->middleware('auth:api')->name('create');
+    Route::delete('/delete/{task}', [TaskController::class, 'destroy'])->middleware('auth:api')->name('delete');
 });
